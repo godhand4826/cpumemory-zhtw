@@ -1,23 +1,15 @@
-name: Build and Publish My GitBook
-
+name: 'Gitbook Action Build'
 on:
-  workflow_dispatch:
   push:
     branches:
       - master
-
 jobs:
-  build-and-deploy:
-    name: Build and deploy
+  build:
     runs-on: ubuntu-latest
-    env:
-      MY_SECRET   : ${{secrets.GH_ACCESS_TOKEN}}
-      USER_NAME   : ${{secrets.GH_USERNAME}}
-      USER_EMAIL  : ${{secrets.GH_EMAIL}}
-      BOOK_DIR    : .
-
     steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v4
-    - name: Build and Deploy 🚀
-      uses: onejar99/gitbook-build-publish-action@v1.0.3
+    - name: Checkout action
+      uses: actions/checkout@v2
+    - name: Gitbook Action
+      uses: ZanderZhao/gitbook-action@v1.2.4
+      with:
+        token: ${{ secrets.GH_ACCESS_TOKEN }}
